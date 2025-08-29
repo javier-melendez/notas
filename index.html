@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calificaciones de Estudiantes</title>
+  <!-- Enlaza el CDN de Tailwind para usar sus clases -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /*
+      * Estilos personalizados para asegurar un mejor manejo del responsive
+      * La tabla será scrollable en dispositivos móviles para evitar que el contenido se amontone.
+    */
+    @media (max-width: 768px) {
+      .table-responsive {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      .table-responsive table {
+        width: 100%;
+        min-width: 600px; /* Asegura un ancho mínimo para que la tabla sea legible */
+      }
+    }
+  </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center p-6 min-h-screen font-sans antialiased">
+  
+  <div class="bg-white rounded-lg shadow-2xl p-6 w-full max-w-4xl mx-auto">
+    <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">Calificaciones de Estudiantes 🧑‍🎓</h1>
+    
+    <!-- Contenedor responsivo para la tabla -->
+    <div class="table-responsive">
+      <table class="min-w-full divide-y divide-gray-200 rounded-lg">
+        <thead class="bg-gray-50">
+          <tr>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider rounded-tl-lg">Estudiante</th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Entrega Github</th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Collage</th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Grupo</th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider rounded-tr-lg">Parcial</th>
+          </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+          <!-- El siguiente script genera las filas de la tabla dinámicamente -->
+          <script>
+            // Datos del DataFrame, convertidos a una estructura de JavaScript
+            const data = {
+                "Estudiante": [
+                    "CHAYA OCHOA, LUISA FERNANDA",
+                    "GAMEZ CASTRO, CAMILA",
+                    "GUTIERREZ CORTES, LAURA SOFIA",
+                    "HERNÁNDEZ PUENTES, GABRIEL ALEJANDRO",
+                    "MENDEZ CARDENAS, INGRID KATHERINE",
+                    "RODRIGUEZ PARDO, LAURA JULIANA",
+                    "ROMERO VARGAS, JUAN DAVID",
+                    "SÁNCHEZ CEBALLOS, LAURA VALENTINA",
+                    "SERRANO COTRINA, STEFANYA",
+                    "VERA OTERO, MARIA ISABEL",
+                    "ALEKZA VALENTINA CARRERO MELO",
+                    "MARÍA SOFÍA MATHIASEN OBANDO",
+                    "FRANCO HERREÑO, ALEJANDRO"
+                ],
+                "Entrega Github": [2.5, 2.5, 4.25, 3.5, 4.5, 5, 3.5, 0, 2.5, 2.5, 5, 3.5, 5],
+                "Collage": [5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 3.5],
+                "Grupo": [4.5, 4.5, 4.5, 5, 4.5, 4.5, 5, 5, 4.5, 4.5, 4.5, 5, 3.5]
+            };
+
+            const tbody = document.querySelector('tbody');
+            const numStudents = data.Estudiante.length;
+
+            for (let i = 0; i < numStudents; i++) {
+                const row = document.createElement('tr');
+                row.className = 'hover:bg-gray-50 transition-colors duration-200';
+                
+                // Celda para el nombre del estudiante
+                const studentCell = document.createElement('td');
+                studentCell.className = 'px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900';
+                studentCell.textContent = data.Estudiante[i];
+                row.appendChild(studentCell);
+
+                // Celda para la nota de Entrega Github
+                const githubCell = document.createElement('td');
+                githubCell.className = 'px-6 py-4 whitespace-nowrap text-sm text-gray-500';
+                githubCell.textContent = data['Entrega Github'][i];
+                row.appendChild(githubCell);
+
+                // Celda para la nota de Collage
+                const collageCell = document.createElement('td');
+                collageCell.className = 'px-6 py-4 whitespace-nowrap text-sm text-gray-500';
+                collageCell.textContent = data.Collage[i];
+                row.appendChild(collageCell);
+                
+                // Celda para la nota de Grupo
+                const groupCell = document.createElement('td');
+                groupCell.className = 'px-6 py-4 whitespace-nowrap text-sm text-gray-500';
+                groupCell.textContent = data.Grupo[i];
+                row.appendChild(groupCell);
+
+                // Celda para la nota de Parcial
+                const partialGrade = (data['Entrega Github'][i] * 0.4 + data.Collage[i] * 0.4 + data.Grupo[i] * 0.2).toFixed(2);
+                const partialCell = document.createElement('td');
+                partialCell.className = 'px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-900';
+                partialCell.textContent = partialGrade;
+                row.appendChild(partialCell);
+
+                tbody.appendChild(row);
+            }
+          </script>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</body>
+</html>
