@@ -3,12 +3,53 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Calificaciones CIM 2025</title>
+  <title>Calificaciones de Estudiantes</title>
   <!-- Enlaza el CDN de Tailwind para usar sus clases -->
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     /*
-      * Estilos personalizados para asegurar un mejor manejo del responsive
+      * Estilos para el tooltip
+      * Se muestra al pasar el cursor sobre un elemento con la clase .tooltip-container
+    */
+    .tooltip-container {
+      position: relative;
+    }
+
+    .tooltip-container .tooltip-text {
+      visibility: hidden;
+      width: 120px;
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 5px 0;
+      position: absolute;
+      z-index: 10;
+      bottom: 125%; /* Posiciona el tooltip encima del texto */
+      left: 50%;
+      margin-left: -60px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .tooltip-container .tooltip-text::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-left: -5px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: #333 transparent transparent transparent;
+    }
+
+    .tooltip-container:hover .tooltip-text {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    /*
+      * Estilos para asegurar un mejor manejo del responsive
       * La tabla será scrollable en dispositivos móviles para evitar que el contenido se amontone.
     */
     @media (max-width: 768px) {
@@ -28,7 +69,7 @@
 <body class="bg-gray-100 flex items-center justify-center p-6 min-h-screen font-sans antialiased">
   
   <div class="bg-white rounded-lg shadow-2xl p-6 w-full max-w-4xl mx-auto">
-    <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">Calificaciones Primer Corte 🧑‍🎓</h1>
+    <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">Calificaciones de Estudiantes ✨</h1>
     
     <!-- Contenedor responsivo para la tabla -->
     <div class="table-responsive">
@@ -36,10 +77,22 @@
         <thead class="bg-gray-50">
           <tr>
             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider rounded-tl-lg">Estudiante</th>
-            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Entrega Github</th>
-            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Collage</th>
-            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Grupo</th>
-            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider rounded-tr-lg">Parcial</th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider tooltip-container">
+              Entrega Github
+              <span class="tooltip-text">40% de la nota</span>
+            </th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider tooltip-container">
+              Collage
+              <span class="tooltip-text">40% de la nota</span>
+            </th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider tooltip-container">
+              Grupo
+              <span class="tooltip-text">20% de la nota</span>
+            </th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider rounded-tr-lg tooltip-container">
+              Parcial
+              <span class="tooltip-text">25% de la nota total del curso</span>
+            </th>
           </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
